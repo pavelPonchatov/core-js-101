@@ -92,8 +92,8 @@ function getSumBetweenNumbers(min, max) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return (a + b > c) && (a + c > b) && (b + c > a);
 }
 
 
@@ -160,8 +160,8 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  return Math.hypot(point.x - circle.center.x, point.y - circle.center.y) < circle.radius;
 }
 
 
@@ -237,8 +237,8 @@ function reverseString(str) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return `${num}`.split('').reverse().join('');
 }
 
 
@@ -280,8 +280,8 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  return ((num - 1) % 9) + 1;
 }
 
 
@@ -306,8 +306,21 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const oB = ['[', '{', '(', '<'];
+  const cB = [']', '}', ')', '>'];
+  const stack = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (oB.indexOf(str[i]) !== -1) {
+      stack.push(str[i]);
+    } else if (oB.indexOf(stack.pop()) !== cB.indexOf(str[i])) {
+      return false;
+    }
+  }
+  if (stack.length === 0) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -331,10 +344,9 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return Number(num).toString(n);
 }
-
 
 /**
  * Returns the commom directory path for specified array of full filenames.
